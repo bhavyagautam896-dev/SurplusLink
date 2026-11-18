@@ -107,8 +107,8 @@ export class AnalyticsService {
 
     const res = await query<HotspotCluster>(sql, [detourFactor, speedKmh]);
 
-    const totalCount = res.rows.reduce((acc, h) => acc + Number(h.unmatched_count), 0);
-    const totalKg = res.rows.reduce((acc, h) => acc + Number(h.total_unmatched_kg), 0);
+    const totalCount = res.rows.reduce((acc: number, h: any) => acc + Number(h.unmatched_count), 0);
+    const totalKg = res.rows.reduce((acc: number, h: any) => acc + Number(h.total_unmatched_kg), 0);
 
     return {
       hotspots: res.rows,
@@ -136,7 +136,7 @@ export class AnalyticsService {
 
     const res = await query<{ week: string; rescued_kg: number; pickups_count: number }>(sql);
 
-    return res.rows.map(row => ({
+    return res.rows.map((row: any) => ({
       week: row.week,
       rescuedKg: Number(row.rescued_kg),
       pickupsCount: Number(row.pickups_count),
@@ -174,7 +174,7 @@ export class AnalyticsService {
 
     return {
       averageMinutesToClaim: Math.round(parseFloat(avgRes.rows[0].avg_minutes) * 10) / 10,
-      distribution: distRes.rows.map(row => ({
+      distribution: distRes.rows.map((row: any) => ({
         range: row.range,
         count: parseInt(row.count, 10),
       })),

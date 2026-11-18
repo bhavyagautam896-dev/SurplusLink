@@ -6,18 +6,15 @@ export async function runMigrations(): Promise<void> {
   console.log('🔄 Running database migrations...');
   const srcMigrations = path.resolve(process.cwd(), 'src/database/migrations');
   const distMigrations = path.resolve(process.cwd(), 'dist/database/migrations');
-  const localMigrations = path.resolve(__dirname, 'migrations');
 
   let migrationsDir = srcMigrations;
   if (fs.existsSync(srcMigrations)) {
     migrationsDir = srcMigrations;
   } else if (fs.existsSync(distMigrations)) {
     migrationsDir = distMigrations;
-  } else if (fs.existsSync(localMigrations)) {
-    migrationsDir = localMigrations;
   }
 
-  const files = fs.readdirSync(migrationsDir).filter(f => f.endsWith('.sql')).sort();
+  const files = fs.readdirSync(migrationsDir).filter((f: string) => f.endsWith('.sql')).sort();
 
   // Create migrations tracking table
   await pool.query(`
