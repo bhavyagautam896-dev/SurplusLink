@@ -175,7 +175,7 @@ export class AuthService {
     return {
       httpOnly: true,
       secure: isProduction,
-      sameSite: isProduction ? ('strict' as const) : ('lax' as const),
+      sameSite: isProduction ? ('none' as const) : ('lax' as const),
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     };
   }
