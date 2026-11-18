@@ -79,3 +79,4 @@ export class NgoRepository {
 }
 
 export const ngoRepository = new NgoRepository();
+

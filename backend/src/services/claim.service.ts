@@ -212,6 +212,11 @@ export class ClaimService {
   async getClaimsByDonor(donorId: string): Promise<Claim[]> {
     return claimRepository.findByDonorId(donorId);
   }
+
+  async getAllClaims(): Promise<Claim[]> {
+    return claimRepository.findAll();
+  }
 }
 
 export const claimService = new ClaimService();
+

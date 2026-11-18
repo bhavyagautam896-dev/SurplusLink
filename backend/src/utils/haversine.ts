@@ -80,3 +80,4 @@ export function getBoundingBox(
     maxLon: lon + Math.abs(lonDelta),
   };
 }
+

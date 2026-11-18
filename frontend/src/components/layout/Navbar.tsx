@@ -39,9 +39,6 @@ export const Navbar: React.FC = () => {
             <span className="text-xl font-bold tracking-tight text-forest-900">
               Surplus<span className="text-forest-600">Link</span>
             </span>
-            <span className="hidden sm:inline-block ml-2 text-xs font-semibold px-2 py-0.5 rounded bg-forest-100 text-forest-800">
-              TPDS-III
-            </span>
           </div>
         </Link>
 
@@ -233,3 +230,4 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+

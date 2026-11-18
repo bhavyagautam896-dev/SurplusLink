@@ -212,3 +212,4 @@ $$ LANGUAGE sql IMMUTABLE;
 - `idx_claims_ngo_id` — Fast query for NGO claim history.
 - `idx_listings_coords` / `idx_ngos_coords` — Spatial index for Haversine distance computation.
 - `idx_ngos_accepting` — Immediate filter for NGOs ready to receive donations.
+

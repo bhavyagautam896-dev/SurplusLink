@@ -20,11 +20,13 @@ export const ClaimsPage: React.FC = () => {
   const { user } = useAuth();
   const [claims, setClaims] = useState<Claim[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [tab, setTab] = useState<'ACTIVE' | 'PICKED_UP' | 'COMPLETED'>('ACTIVE');
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
   const fetchClaims = async () => {
     setLoading(true);
+    setLoadError(null);
     try {
       const res = await api.get('/claims/mine');
       if (res.data.success) {
@@ -32,6 +34,7 @@ export const ClaimsPage: React.FC = () => {
       }
     } catch (err) {
       console.error('Failed to load claims', err);
+      setLoadError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -81,7 +84,9 @@ export const ClaimsPage: React.FC = () => {
             Food Rescue Lifecycle & Claims
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Track pickup dispatch, transit status, and confirm successful handoffs
+            {user?.role === 'ADMIN'
+              ? 'Review all claims and pickup progress across the platform'
+              : 'Track pickup dispatch, transit status, and confirm successful handoffs'}
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={fetchClaims}>
@@ -130,7 +135,17 @@ export const ClaimsPage: React.FC = () => {
       </div>
 
       {/* Content */}
-      {loading ? (
+      {loadError ? (
+        <Card className="text-center py-10 space-y-3">
+          <Truck className="w-10 h-10 text-rose-500 mx-auto" />
+          <h3 className="text-base font-semibold text-slate-800">Could not load claims</h3>
+          <p className="text-sm text-slate-600">{loadError}</p>
+          <Button variant="outline" size="sm" onClick={fetchClaims} className="mx-auto">
+            <RotateCw className="w-4 h-4 mr-1.5" />
+            Try Again
+          </Button>
+        </Card>
+      ) : loading ? (
         <div className="py-20 text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-forest-800 mx-auto" />
           <p className="text-xs text-slate-500 mt-2">Loading rescue claims...</p>
@@ -261,3 +276,4 @@ export const ClaimsPage: React.FC = () => {
     </div>
   );
 };
+

@@ -368,3 +368,4 @@ Returns breakdown across completed, claimed, open matched, unmatched, and expire
 - **URL:** `GET /api/analytics/matching`
 - **Auth Required:** No
 - **Success Response:** `200 OK`
+

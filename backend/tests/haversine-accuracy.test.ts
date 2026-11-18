@@ -63,3 +63,4 @@ describe('Haversine Distance Accuracy Verification', () => {
     expect(parseFloat(res.rows[0].dist)).toBe(0);
   });
 });
+

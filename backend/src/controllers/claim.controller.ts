@@ -65,8 +65,10 @@ export class ClaimController {
         claims = await claimService.getClaimsByNgo(req.user.ngoId);
       } else if (req.user?.role === 'DONOR' && req.user.donorId) {
         claims = await claimService.getClaimsByDonor(req.user.donorId);
+      } else if (req.user?.role === 'ADMIN') {
+        claims = await claimService.getAllClaims();
       } else {
-        throw new AppError('Claims are only available for Donors and NGOs', 403);
+        throw new AppError('A valid Donor, NGO, or Admin account is required to view claims', 403);
       }
 
       res.status(200).json({
@@ -96,3 +98,4 @@ export class ClaimController {
 }
 
 export const claimController = new ClaimController();
+

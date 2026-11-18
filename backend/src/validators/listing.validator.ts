@@ -40,3 +40,4 @@ export const nearbyListingsQuerySchema = z.object({
 export type CreateListingInput = z.infer<typeof createListingSchema>;
 export type UpdateListingInput = z.infer<typeof updateListingSchema>;
 export type NearbyListingsQuery = z.infer<typeof nearbyListingsQuerySchema>;
+

@@ -96,6 +96,26 @@ export class ClaimRepository {
     return res.rows;
   }
 
+  async findAll(): Promise<Claim[]> {
+    const res = await query<Claim>(
+      `SELECT c.*,
+              l.food_type,
+              l.quantity_kg,
+              l.safe_until,
+              d.organization_name AS donor_organization_name,
+              d.address AS donor_address,
+              d.contact_phone AS donor_phone,
+              n.organization_name AS ngo_organization_name,
+              n.contact_phone AS ngo_phone
+       FROM claims c
+       JOIN listings l ON l.id = c.listing_id
+       JOIN donors d ON d.id = l.donor_id
+       JOIN ngos n ON n.id = c.ngo_id
+       ORDER BY c.claimed_at DESC`
+    );
+    return res.rows;
+  }
+
   async updateStatus(
     id: string,
     status: ClaimStatus,
@@ -130,3 +150,4 @@ export class ClaimRepository {
 }
 
 export const claimRepository = new ClaimRepository();
+

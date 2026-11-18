@@ -90,6 +90,15 @@ describe('Normal-Case End-to-End Workflow Testing', () => {
     expect(match).toBeUndefined();
   });
 
+  it('Admin claim view includes the new claim and organization details', async () => {
+    const claims = await claimService.getAllClaims();
+    const claim = claims.find((item) => item.id === claimId);
+
+    expect(claim).toBeDefined();
+    expect(claim?.donor_organization_name).toBeDefined();
+    expect(claim?.ngo_organization_name).toBeDefined();
+  });
+
   it('Step 4: NGO marks food as picked up', async () => {
     const updatedClaim = await claimService.markPickup(claimId, ngoId);
     expect(updatedClaim.status).toBe('PICKED_UP');

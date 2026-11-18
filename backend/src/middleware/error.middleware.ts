@@ -68,3 +68,4 @@ export function errorHandler(
     ...(err.details && { details: err.details }),
   });
 }
+

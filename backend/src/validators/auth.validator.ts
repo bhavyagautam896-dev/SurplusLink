@@ -35,3 +35,4 @@ export const loginSchema = z.object({
 export type RegisterDonorInput = z.infer<typeof registerDonorSchema>;
 export type RegisterNgoInput = z.infer<typeof registerNgoSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+

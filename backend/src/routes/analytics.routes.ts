@@ -12,3 +12,4 @@ router.get('/claim-times', analyticsController.getClaimTimes);
 router.get('/matching', analyticsController.getMatching);
 
 export default router;
+

@@ -10,3 +10,4 @@ export const updateClaimStatusParamsSchema = z.object({
 
 export type ClaimListingParams = z.infer<typeof claimListingParamsSchema>;
 export type UpdateClaimStatusParams = z.infer<typeof updateClaimStatusParamsSchema>;
+

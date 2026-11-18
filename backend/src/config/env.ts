@@ -32,3 +32,4 @@ export function validateConfig(): void {
     throw new Error('JWT_SECRET environment variable is required');
   }
 }
+
